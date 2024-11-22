@@ -30,6 +30,19 @@ export class ReplicateClient {
         },
       },
     )) as QrCodeControlNetResponse;
+    // const output = (await this.replicate.run(
+    //   "qr2ai/qr_code_ai_art_generator:3c11545581fedfd84313395213d8805dc23fca60c46f24cd86fb9df407ae7113",
+    //   {
+    //     input: {
+    //       url: request.url,
+    //       prompt: request.prompt,
+    //       qr_conditioning_scale: request.qr_conditioning_scale,
+    //       num_inference_steps: request.num_inference_steps,
+    //       guidance_scale: request.guidance_scale,
+    //       negative_prompt: request.negative_prompt,
+    //     },
+    //   },
+    // )) as QrCodeControlNetResponse;
 
     if (!output) {
       throw new Error('Failed to generate QR code');
