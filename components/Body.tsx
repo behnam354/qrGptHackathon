@@ -221,6 +221,15 @@ const Body = ({
                       Download
                     </Button>
                     <Button
+                      variant="secondary"
+                      onClick={() => {
+                        // TODO: Implement print on tee functionality
+                        toast.success('Coming soon!');
+                      }}
+                    >
+                      👕 Print on Tee
+                    </Button>
+                    <Button
                       variant="outline"
                       onClick={() => {
                         navigator.clipboard.writeText(

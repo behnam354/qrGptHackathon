@@ -17,11 +17,13 @@ export class ReplicateClient {
   generateQrCode = async (
     request: QrCodeControlNetRequest,
   ): Promise<string> => {
-    const output = (await this.replicate.run(
-      'zylim0702/qr_code_controlnet:628e604e13cf63d8ec58bd4d238474e8986b054bc5e1326e50995fdbc851c557',
+    const prediction = await this.replicate.deployments.predictions.create(
+      "behnam354",
+      "qr-code-hackathon",
       {
         input: {
           url: request.url,
+          qr_code_content: request.url,
           prompt: request.prompt,
           qr_conditioning_scale: request.qr_conditioning_scale,
           num_inference_steps: request.num_inference_steps,
@@ -29,26 +31,16 @@ export class ReplicateClient {
           negative_prompt: request.negative_prompt,
         },
       },
-    )) as QrCodeControlNetResponse;
-    // const output = (await this.replicate.run(
-    //   "qr2ai/qr_code_ai_art_generator:3c11545581fedfd84313395213d8805dc23fca60c46f24cd86fb9df407ae7113",
-    //   {
-    //     input: {
-    //       url: request.url,
-    //       prompt: request.prompt,
-    //       qr_conditioning_scale: request.qr_conditioning_scale,
-    //       num_inference_steps: request.num_inference_steps,
-    //       guidance_scale: request.guidance_scale,
-    //       negative_prompt: request.negative_prompt,
-    //     },
-    //   },
-    // )) as QrCodeControlNetResponse;
+    );
 
-    if (!output) {
+    // Wait for the prediction to complete
+    const finalPrediction = await this.replicate.wait(prediction);
+    
+    if (!finalPrediction.output) {
       throw new Error('Failed to generate QR code');
     }
 
-    return output[0];
+    return (finalPrediction.output as QrCodeControlNetResponse)[0];
   };
 }
 
