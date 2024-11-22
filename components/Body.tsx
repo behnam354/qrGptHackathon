@@ -23,16 +23,8 @@ import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 import LoadingDots from '@/components/ui/loadingdots';
 import downloadQrCode from '@/utils/downloadQrCode';
 import va from '@vercel/analytics';
-import { PromptSuggestion } from '@/components/PromptSuggestion';
 import { useRouter } from 'next/navigation';
 import { toast, Toaster } from 'react-hot-toast';
-
-const promptSuggestions = [
-  'A city view with clouds',
-  'A beautiful glacier',
-  'A forest overlooking a mountain',
-  'A saharan desert',
-];
 
 const generateFormSchema = z.object({
   url: z.string().min(1),
@@ -85,13 +77,6 @@ const Body = ({
       form.setValue('url', redirectUrl);
     }
   }, [imageUrl, modelLatency, prompt, redirectUrl, id, form]);
-
-  const handleSuggestionClick = useCallback(
-    (suggestion: string) => {
-      form.setValue('prompt', suggestion);
-    },
-    [form],
-  );
 
   const handleSubmit = useCallback(
     async (values: GenerateFormValues) => {
@@ -183,19 +168,6 @@ const Body = ({
                     </FormItem>
                   )}
                 />
-                {/* <div className="my-2">
-                  <p className="text-sm font-medium mb-3">Prompt suggestions</p>
-                  <div className="grid sm:grid-cols-2 grid-cols-1 gap-3 text-center text-gray-500 text-sm">
-                    {promptSuggestions.map((suggestion) => (
-                      <PromptSuggestion
-                        key={suggestion}
-                        suggestion={suggestion}
-                        onClick={() => handleSuggestionClick(suggestion)}
-                        isLoading={isLoading}
-                      />
-                    ))}
-                  </div>
-                </div> */}
                 <Button
                   type="submit"
                   disabled={isLoading}
