@@ -34,8 +34,10 @@ export class ReplicateClient {
     );
 
     // Wait for the prediction to complete
-    const finalPrediction = await this.replicate.wait(prediction);
-    
+    const finalPrediction = await this.replicate.wait(prediction, {
+      interval: 1000
+    });
+
     if (!finalPrediction.output) {
       throw new Error('Failed to generate QR code');
     }
