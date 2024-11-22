@@ -153,7 +153,7 @@ const Body = ({
                     <FormItem>
                       <FormLabel>URL</FormLabel>
                       <FormControl>
-                        <Input placeholder="roomgpt.io" {...field} />
+                        <Input placeholder="behnamshahbazi.com/qrnv" {...field} />
                       </FormControl>
                       <FormDescription>
                         This is what your QR code will link to.
@@ -170,7 +170,7 @@ const Body = ({
                       <FormLabel>Prompt</FormLabel>
                       <FormControl>
                         <Textarea
-                          placeholder="A city view with clouds"
+                          placeholder="A house made of cheese"
                           className="resize-none"
                           {...field}
                         />
@@ -183,7 +183,7 @@ const Body = ({
                     </FormItem>
                   )}
                 />
-                <div className="my-2">
+                {/* <div className="my-2">
                   <p className="text-sm font-medium mb-3">Prompt suggestions</p>
                   <div className="grid sm:grid-cols-2 grid-cols-1 gap-3 text-center text-gray-500 text-sm">
                     {promptSuggestions.map((suggestion) => (
@@ -195,7 +195,7 @@ const Body = ({
                       />
                     ))}
                   </div>
-                </div>
+                </div> */}
                 <Button
                   type="submit"
                   disabled={isLoading}
